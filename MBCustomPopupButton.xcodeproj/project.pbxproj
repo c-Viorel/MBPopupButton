@@ -11,6 +11,13 @@
 		F2796FAD2475CDC200D15094 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2796FAC2475CDC200D15094 /* ViewController.swift */; };
 		F2796FAF2475CDC400D15094 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2796FAE2475CDC400D15094 /* Assets.xcassets */; };
 		F2796FB22475CDC400D15094 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2796FB02475CDC400D15094 /* Main.storyboard */; };
+		F2796FBD2475CFD900D15094 /* MBTagPopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2796FBB2475CFD900D15094 /* MBTagPopoverController.swift */; };
+		F2796FBE2475CFD900D15094 /* MBTagPopoverController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2796FBC2475CFD900D15094 /* MBTagPopoverController.xib */; };
+		F2796FC42475CFF100D15094 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2796FBF2475CFF100D15094 /* Extensions.swift */; };
+		F2796FC52475CFF100D15094 /* MBTagsColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2796FC02475CFF100D15094 /* MBTagsColor.swift */; };
+		F2796FC62475CFF100D15094 /* MBTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2796FC12475CFF100D15094 /* MBTagView.swift */; };
+		F2796FC72475CFF100D15094 /* MBTagCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2796FC22475CFF100D15094 /* MBTagCloseButton.swift */; };
+		F2796FC82475CFF100D15094 /* MBTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2796FC32475CFF100D15094 /* MBTagViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +28,13 @@
 		F2796FB12475CDC400D15094 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F2796FB32475CDC400D15094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2796FB42475CDC400D15094 /* MBCustomPopupButton.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MBCustomPopupButton.entitlements; sourceTree = "<group>"; };
+		F2796FBB2475CFD900D15094 /* MBTagPopoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBTagPopoverController.swift; sourceTree = "<group>"; };
+		F2796FBC2475CFD900D15094 /* MBTagPopoverController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MBTagPopoverController.xib; sourceTree = "<group>"; };
+		F2796FBF2475CFF100D15094 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		F2796FC02475CFF100D15094 /* MBTagsColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBTagsColor.swift; sourceTree = "<group>"; };
+		F2796FC12475CFF100D15094 /* MBTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBTagView.swift; sourceTree = "<group>"; };
+		F2796FC22475CFF100D15094 /* MBTagCloseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBTagCloseButton.swift; sourceTree = "<group>"; };
+		F2796FC32475CFF100D15094 /* MBTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBTagViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +67,7 @@
 		F2796FA92475CDC200D15094 /* MBCustomPopupButton */ = {
 			isa = PBXGroup;
 			children = (
+				F2796FBA2475CFBC00D15094 /* Sources */,
 				F2796FAA2475CDC200D15094 /* AppDelegate.swift */,
 				F2796FAC2475CDC200D15094 /* ViewController.swift */,
 				F2796FAE2475CDC400D15094 /* Assets.xcassets */,
@@ -61,6 +76,20 @@
 				F2796FB42475CDC400D15094 /* MBCustomPopupButton.entitlements */,
 			);
 			path = MBCustomPopupButton;
+			sourceTree = "<group>";
+		};
+		F2796FBA2475CFBC00D15094 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				F2796FBF2475CFF100D15094 /* Extensions.swift */,
+				F2796FC22475CFF100D15094 /* MBTagCloseButton.swift */,
+				F2796FC02475CFF100D15094 /* MBTagsColor.swift */,
+				F2796FC12475CFF100D15094 /* MBTagView.swift */,
+				F2796FC32475CFF100D15094 /* MBTagViewController.swift */,
+				F2796FBB2475CFD900D15094 /* MBTagPopoverController.swift */,
+				F2796FBC2475CFD900D15094 /* MBTagPopoverController.xib */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2796FAF2475CDC400D15094 /* Assets.xcassets in Resources */,
+				F2796FBE2475CFD900D15094 /* MBTagPopoverController.xib in Resources */,
 				F2796FB22475CDC400D15094 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,8 +163,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2796FC62475CFF100D15094 /* MBTagView.swift in Sources */,
 				F2796FAD2475CDC200D15094 /* ViewController.swift in Sources */,
+				F2796FC52475CFF100D15094 /* MBTagsColor.swift in Sources */,
 				F2796FAB2475CDC200D15094 /* AppDelegate.swift in Sources */,
+				F2796FBD2475CFD900D15094 /* MBTagPopoverController.swift in Sources */,
+				F2796FC42475CFF100D15094 /* Extensions.swift in Sources */,
+				F2796FC82475CFF100D15094 /* MBTagViewController.swift in Sources */,
+				F2796FC72475CFF100D15094 /* MBTagCloseButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
