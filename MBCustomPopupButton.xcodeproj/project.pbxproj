@@ -21,6 +21,7 @@
 		F2796FCC2475D26500D15094 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F2796FCB2475D26500D15094 /* README.md */; };
 		F2796FD02475D90000D15094 /* MBPopupButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2796FCE2475D90000D15094 /* MBPopupButtonCell.swift */; };
 		F2796FD12475D90000D15094 /* MBPopupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2796FCF2475D90000D15094 /* MBPopupButton.swift */; };
+		F2796FD42475F1A000D15094 /* MBPopupItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2796FD32475F1A000D15094 /* MBPopupItems.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		F2796FCB2475D26500D15094 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F2796FCE2475D90000D15094 /* MBPopupButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBPopupButtonCell.swift; sourceTree = "<group>"; };
 		F2796FCF2475D90000D15094 /* MBPopupButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBPopupButton.swift; sourceTree = "<group>"; };
+		F2796FD32475F1A000D15094 /* MBPopupItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBPopupItems.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 		F2796FBA2475CFBC00D15094 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				F2796FD22475F18200D15094 /* New Group */,
 				F2796FCD2475D8E500D15094 /* MBButton */,
 				F2796FBF2475CFF100D15094 /* Extensions.swift */,
 				F2796FC22475CFF100D15094 /* MBTagCloseButton.swift */,
@@ -96,6 +99,7 @@
 				F2796FC32475CFF100D15094 /* MBTagViewController.swift */,
 				F2796FBB2475CFD900D15094 /* MBPopupListController.swift */,
 				F2796FBC2475CFD900D15094 /* MBTagPopoverController.xib */,
+				F2796FD32475F1A000D15094 /* MBPopupItems.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -107,6 +111,13 @@
 				F2796FCE2475D90000D15094 /* MBPopupButtonCell.swift */,
 			);
 			path = MBButton;
+			sourceTree = "<group>";
+		};
+		F2796FD22475F18200D15094 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +195,7 @@
 			files = (
 				F2796FD02475D90000D15094 /* MBPopupButtonCell.swift in Sources */,
 				F2796FC62475CFF100D15094 /* MBTagView.swift in Sources */,
+				F2796FD42475F1A000D15094 /* MBPopupItems.swift in Sources */,
 				F2796FAD2475CDC200D15094 /* ViewController.swift in Sources */,
 				F2796FAB2475CDC200D15094 /* AppDelegate.swift in Sources */,
 				F2796FD12475D90000D15094 /* MBPopupButton.swift in Sources */,
