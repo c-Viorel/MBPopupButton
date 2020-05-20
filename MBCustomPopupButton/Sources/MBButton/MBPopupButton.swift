@@ -64,31 +64,31 @@ open class MBPopupButton: NSButton {
             resetLayersProperties()
         }
     }
-    
-    open override var frame: NSRect { didSet { self.resetLayersProperties(animated: false)}}
 
-    open override var bounds: NSRect { didSet { self.resetLayersProperties(animated: false)}}
+    open override var frame: NSRect { didSet { self.resetLayersProperties(animated: false) } }
+
+    open override var bounds: NSRect { didSet { self.resetLayersProperties(animated: false) } }
 
     open override var title: String { didSet { resetLayersProperties() } }
 
     // MARK: - Private vars
+
     fileprivate var layers: [String: AnyObject] = [:]
     fileprivate var _isOn: Bool = true
     fileprivate var trackingArea: NSTrackingArea!
 
-  
-
     // MARK: Init & config
-    override public init(frame frameRect: NSRect) {
+
+    public override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         setupLayers()
     }
 
-    required public init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupLayers()
         if let cellIsOk = self.cell?.isKind(of: MBPopupButtonCell.self), cellIsOk == false {
-           assertionFailure("You forgot to set the button cell to MBPopupButtonCell. Please go to the storyboard where the button is placed and set the cell accordingly!")
+            assertionFailure("You forgot to set the button cell to MBPopupButtonCell. Please go to the storyboard where the button is placed and set the cell accordingly!")
         }
     }
 
@@ -115,6 +115,7 @@ open class MBPopupButton: NSButton {
         if isEnabled {
             CATransaction.begin()
             CATransaction.setAnimationDuration(0.2)
+
             (layers["bg"] as! CALayer).backgroundColor = backgroundHoverColor.cgColor
             (layers["bg"] as! CALayer).borderColor = borderHoverColor.cgColor
             (layers["title"] as! CATextLayer).foregroundColor = titleHoverColor.cgColor
@@ -127,18 +128,21 @@ open class MBPopupButton: NSButton {
         if isEnabled {
             CATransaction.begin()
             CATransaction.setAnimationDuration(0.2)
+
             (layers["bg"] as! CALayer).backgroundColor = backgroundColor.cgColor
             (layers["bg"] as! CALayer).borderColor = borderColor.cgColor
             (layers["title"] as! CATextLayer).foregroundColor = titleColor.cgColor
+
             CATransaction.commit()
         }
     }
 
     open override func mouseDown(with _: NSEvent) {
         if isEnabled {
-            (layers["bg"] as! CALayer).borderColor = borderActiveColor.cgColor
-            (layers["bg"] as! CALayer).backgroundColor = backgroundActiveColor.cgColor
-            (layers["title"] as! CATextLayer).foregroundColor = titleActiveColor.cgColor
+            (layers["bg"] as? CALayer)?.borderColor = borderActiveColor.cgColor
+            (layers["bg"] as? CALayer)?.backgroundColor = backgroundActiveColor.cgColor
+            (layers["title"] as? CATextLayer)?.foregroundColor = titleActiveColor.cgColor
+
             if let action = action, let target = target {
                 NSApp.sendAction(action, to: target, from: self)
             }
@@ -147,18 +151,21 @@ open class MBPopupButton: NSButton {
 
     open override func mouseUp(with _: NSEvent) {
         if isEnabled {
-            (layers["bg"] as! CALayer).borderColor = borderHoverColor.cgColor
-            (layers["bg"] as! CALayer).backgroundColor = backgroundHoverColor.cgColor
-            (layers["title"] as! CATextLayer).foregroundColor = titleHoverColor.cgColor
+            (layers["bg"] as? CALayer)?.borderColor = borderHoverColor.cgColor
+            (layers["bg"] as? CALayer)?.backgroundColor = backgroundHoverColor.cgColor
+            (layers["title"] as? CATextLayer)?.foregroundColor = titleHoverColor.cgColor
         }
     }
 
     private func resetProperties() {
         CATransaction.begin()
         CATransaction.setAnimationDuration(0.25)
-        (layers["title"] as! CATextLayer).string = title
+
+        (layers["title"] as? CATextLayer)?.string = title
+
         CATransaction.commit()
     }
+
     // Reset all color and state of control to match with the new appearance
     private func resetLayersProperties(animated: Bool = false) {
         CATransaction.begin()
@@ -166,31 +173,31 @@ open class MBPopupButton: NSButton {
             CATransaction.setAnimationDuration(0)
         }
 
-        if let rectangle = layers["bg"] as? CALayer {
-            rectangle.frame = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.size.width, height: bounds.size.height)
-            rectangle.borderColor = isEnabled ? borderColor.cgColor : borderColor.withAlphaComponent(disabledControlsAlphaValue).cgColor
-            rectangle.backgroundColor = isEnabled ? backgroundColor.cgColor : backgroundColor.withAlphaComponent(disabledControlsAlphaValue).cgColor
-            rectangle.masksToBounds = true
-            rectangle.cornerRadius = cornerRadius
-            rectangle.borderColor = borderColor.cgColor
-            rectangle.borderWidth = borderWidth
+        if let bgLayer = layers["bg"] as? CALayer {
+            bgLayer.frame = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.size.width, height: bounds.size.height)
+            bgLayer.borderColor = isEnabled ? borderColor.cgColor : borderColor.withAlphaComponent(disabledControlsAlphaValue).cgColor
+            bgLayer.backgroundColor = isEnabled ? backgroundColor.cgColor : backgroundColor.withAlphaComponent(disabledControlsAlphaValue).cgColor
+            bgLayer.masksToBounds = true
+            bgLayer.cornerRadius = cornerRadius
+            bgLayer.borderColor = borderColor.cgColor
+            bgLayer.borderWidth = borderWidth
         }
 
-        if let text = layers["title"] as? CATextLayer {
-            text.font = font
-            text.fontSize = font?.fontDescriptor.fontAttributes[NSFontDescriptor.AttributeName.size] as? CGFloat ?? 12
-            text.contentsScale = NSScreen.main!.backingScaleFactor * 2
-            text.alignmentMode = CATextLayerAlignmentMode.center
+        if let titleLayer = layers["title"] as? CATextLayer {
+            titleLayer.font = font
+            titleLayer.fontSize = font?.fontDescriptor.fontAttributes[NSFontDescriptor.AttributeName.size] as? CGFloat ?? 12
+            titleLayer.contentsScale = NSScreen.main!.backingScaleFactor * 2
+            titleLayer.alignmentMode = CATextLayerAlignmentMode.center
             if alignment == .left {
-                text.alignmentMode = CATextLayerAlignmentMode.left
+                titleLayer.alignmentMode = CATextLayerAlignmentMode.left
             }
             if alignment == .right {
-                text.alignmentMode = CATextLayerAlignmentMode.right
+                titleLayer.alignmentMode = CATextLayerAlignmentMode.right
             }
-            text.string = title
+            titleLayer.string = title
 
-            text.foregroundColor = isEnabled ? titleColor.cgColor : titleColor.withAlphaComponent(disabledControlsAlphaValue).cgColor
-            text.frame = CGRect(x: bounds.origin.x + 4, y: bounds.origin.y + 2.5 - decaleYTitle, width: bounds.size.width - 8, height: bounds.size.height)
+            titleLayer.foregroundColor = isEnabled ? titleColor.cgColor : titleColor.withAlphaComponent(disabledControlsAlphaValue).cgColor
+            titleLayer.frame = CGRect(x: bounds.origin.x + 4, y: bounds.origin.y + 2.5 - decaleYTitle, width: bounds.size.width - 8, height: bounds.size.height)
         }
 
         CATransaction.commit()
@@ -200,38 +207,37 @@ open class MBPopupButton: NSButton {
         layers.removeAll()
 
         wantsLayer = true
-        let rectangle: CALayer = CALayer()
-        rectangle.frame = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.size.width, height: bounds.size.height)
-        rectangle.backgroundColor = NSColor.clear.cgColor
-        rectangle.cornerRadius = cornerRadius
-        rectangle.borderWidth = 1.0
-        rectangle.borderColor = borderColor.cgColor
-        rectangle.backgroundColor = backgroundColor.cgColor
-        layers["bg"] = rectangle
-        layer?.addSublayer(rectangle)
+        let bgLayer: CALayer = CALayer()
+        bgLayer.frame = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.size.width, height: bounds.size.height)
+        bgLayer.backgroundColor = NSColor.clear.cgColor
+        bgLayer.cornerRadius = cornerRadius
+        bgLayer.borderWidth = 1.0
+        bgLayer.borderColor = borderColor.cgColor
+        bgLayer.backgroundColor = backgroundColor.cgColor
+        layers["bg"] = bgLayer
+        layer?.addSublayer(bgLayer)
 
-        let text: CATextLayer = CATextLayer()
-        text.font = font
-        text.fontSize = font?.fontDescriptor.fontAttributes[NSFontDescriptor.AttributeName.size] as? CGFloat ?? 12
-        text.contentsScale = NSScreen.main!.backingScaleFactor * 2
-        text.alignmentMode = CATextLayerAlignmentMode.center
+        let titleLayer: CATextLayer = CATextLayer()
+        titleLayer.font = font
+        titleLayer.fontSize = font?.fontDescriptor.fontAttributes[NSFontDescriptor.AttributeName.size] as? CGFloat ?? 12
+        titleLayer.contentsScale = NSScreen.main!.backingScaleFactor * 2
+        titleLayer.alignmentMode = CATextLayerAlignmentMode.center
         if alignment == .left {
-            text.alignmentMode = CATextLayerAlignmentMode.left
+            titleLayer.alignmentMode = CATextLayerAlignmentMode.left
         }
         if alignment == .right {
-            text.alignmentMode = CATextLayerAlignmentMode.right
+            titleLayer.alignmentMode = CATextLayerAlignmentMode.right
         }
-        text.string = title
-        text.foregroundColor = NSColor.lightGray.cgColor
-        layers["title"] = text
-        layer?.addSublayer(text)
+        titleLayer.string = title
+        titleLayer.foregroundColor = NSColor.lightGray.cgColor
+        layers["title"] = titleLayer
+        layer?.addSublayer(titleLayer)
 
         resetLayersProperties()
     }
 }
 
 extension MBPopupButton {
-   
     func applySystemColorSheme() {
 //        loadCustomAppSpecificColors()
         backgroundColor = NSColor.controlAccentColor
