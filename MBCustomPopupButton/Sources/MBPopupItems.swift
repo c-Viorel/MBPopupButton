@@ -10,9 +10,9 @@ import Cocoa
 
 /// The base class for all items accepted  by our popup control
 /// DO NOT INIT objects  of this class.
-open class MBPopupItem { public init() {} }
+open class MBPopupItem { fileprivate init() {} }
 
-/// A
+/// A class that describe the properties for a separator item
 open class MBPopupSeparatorItem: MBPopupItem {
     open var lineColor: NSColor
     open var lineWidth: CGFloat
@@ -48,6 +48,34 @@ open class MBPopupSeparatorItem: MBPopupItem {
         lineWidth = height
         paddingLeft = left
         paddingRight = right
+        super.init()
+    }
+}
+
+/// A class that describe the properties for an text  item
+open class MBPopupTextItem: MBPopupItem {
+    
+    open var title:String
+    open var titleColor: NSColor
+    
+    public init(withTitle title:String,  color: NSColor = .lightGray) {
+        self.title = title
+        titleColor = color
+        super.init()
+    }
+}
+
+/// A class that describe the properties for an item that along title, will also contain an icon.
+open class MBPopupIconAndTextItem: MBPopupItem {
+    
+    open var icon:NSImage
+    open var title:String
+    open var titleColor: NSColor
+    
+    public init(withTitle title:String, image:NSImage,  color: NSColor = .lightGray) {
+        self.title = title
+        titleColor = color
+        icon = image
         super.init()
     }
 }
