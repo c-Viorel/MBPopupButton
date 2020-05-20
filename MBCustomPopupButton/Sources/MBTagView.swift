@@ -54,7 +54,7 @@ open class MBTagView: NSControl {
         super.init(frame: NSZeroRect)
         id       = UUID().uuidString
         self.title    = title
-        tagColor = MBTagsColor.newRandomColor()
+        tagColor = .red
         setupLayers()
     }
 

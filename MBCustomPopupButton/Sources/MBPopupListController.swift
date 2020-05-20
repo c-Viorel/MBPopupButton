@@ -10,12 +10,12 @@ import Cocoa
 import Foundation
 
 
-public class MBTagPopoverController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSSearchFieldDelegate {
+public class MBPopupListController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSSearchFieldDelegate {
 
     var minPopoverWidth:CGFloat = 170
 
-    @IBOutlet weak var tableWithTags: NSTableView!
-    @IBOutlet weak var searchField: NSSearchField!
+    @IBOutlet private var tableWithTags: NSTableView!
+    @IBOutlet var searchField: NSSearchField!
     
 
     private var matches:[MBTagView] = []
@@ -39,7 +39,7 @@ public class MBTagPopoverController: NSViewController, NSTableViewDelegate, NSTa
     
     
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         tableWithTags.delegate     = self
         tableWithTags.dataSource   = self
@@ -49,7 +49,7 @@ public class MBTagPopoverController: NSViewController, NSTableViewDelegate, NSTa
     }
     
 
-    override func viewWillAppear() {
+    public override func viewWillAppear() {
         super.viewWillAppear()
         tableWithTags.reloadData()
     }
@@ -73,7 +73,7 @@ public class MBTagPopoverController: NSViewController, NSTableViewDelegate, NSTa
                 if suggestionTags.contains(where: { (current) -> Bool in
                     return current.title.lowercased() == searchField.stringValue.lowercased()
                 }) {
-                    /// A tag with an identic name exist, but user dindn't selected from susgestions.
+                    /// A tag with an identical name exist, but user didn't selected from suggestions.
                     /// we don't create a new tag. We will use the one that already exist
                     let tags = suggestionTags.filter { (current) -> Bool in
                         return current.title.lowercased() == searchField.stringValue.lowercased()
@@ -85,29 +85,30 @@ public class MBTagPopoverController: NSViewController, NSTableViewDelegate, NSTa
                     
                 } else {
                     // The tag does not exist. Create a new one and add it to the tag controller.
-                    let tag            = MBTagView.init(with: searchField.stringValue, color: MBTagsColor.newRandomColor(alreadyUsed: suggestionTags))
+                    let tag            = MBTagView.init(with: searchField.stringValue, color: .red)
                     newTagInserted?(tag)
                 }
             }
         }
     }
     
-    /// Detect some important actions, and override
+    /// Detect some important actions
     /// like arrow up/down, enter
-    func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+    /// Override them  in order to provide
+    public func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
         let row:Int        = self.tableWithTags.selectedRow
-        var isSeachFosused = false
+        var isSearchFocused = false
         
         if let responder   = NSApp.keyWindow?.firstResponder {
             if responder.isKind(of: NSTextView.self) {
-                isSeachFosused = true
+                isSearchFocused = true
             }
         }
         
         switch commandSelector {
             /// Key up
         case #selector(moveUp):
-            if isSeachFosused && row != -1 && matches.count > 0{
+            if isSearchFocused && row != -1 && matches.count > 0{
                 self.tableWithTags.selectRowIndexes(IndexSet(integer: row - 1), byExtendingSelection: false)
                 self.tableWithTags.scrollRowToVisible(self.tableWithTags.selectedRow)
             }
@@ -119,7 +120,7 @@ public class MBTagPopoverController: NSViewController, NSTableViewDelegate, NSTa
             return true
             /// key down
         case #selector(moveDown):
-            if isSeachFosused && row != -1 && matches.count > 0{
+            if isSearchFocused && row != -1 && matches.count > 0{
                 self.tableWithTags.selectRowIndexes(IndexSet(integer: row + 1), byExtendingSelection: false)
                 self.tableWithTags.scrollRowToVisible(self.tableWithTags.selectedRow)
             }
@@ -139,7 +140,7 @@ public class MBTagPopoverController: NSViewController, NSTableViewDelegate, NSTa
     }
     
     //MARK:- Tags table dataSource
-    func numberOfRows(in tableView: NSTableView) -> Int {
+    public func numberOfRows(in tableView: NSTableView) -> Int {
         matches = suggestionTags
         if self.searchField.stringValue.count > 0 {
             matches = suggestionTags.filter({ (tag) -> Bool in
@@ -159,7 +160,7 @@ public class MBTagPopoverController: NSViewController, NSTableViewDelegate, NSTa
         return  matches.count
     }
     
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    public func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
         var cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "myCell"), owner: self) as? MBTagCellView
         if cellView == nil{
@@ -185,7 +186,7 @@ public class MBTagPopoverController: NSViewController, NSTableViewDelegate, NSTa
         return cellView
         
     }
-        func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
+    public func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
             return AutoCompleteTableRowView()
         }
     
@@ -197,7 +198,7 @@ public class MBTagPopoverController: NSViewController, NSTableViewDelegate, NSTa
 }
 
 
-class AutoCompleteTableRowView:NSTableRowView{
+class AutoCompleteTableRowView:NSTableRowView {
     override func drawSelection(in dirtyRect: NSRect) {
         if self.selectionHighlightStyle != .none{
             let selectionRect = self.bounds
@@ -256,19 +257,13 @@ class MBTagCellView:NSTableCellView {
         bez.fill()
     }
     
-    
 }
 
 
 //MARK:- MBTagSearchField
-class MBTagSearchField:NSSearchField {
-    override func awakeFromNib() {
-    }
-    
-    override func drawFocusRingMask() {
-        return
-    }
-    
+/// override default NSSearchField to avoid drawing of the  focus ring mask.
+public class MBSearchField:NSSearchField {
+    public override func drawFocusRingMask() { return }
 }
 
 

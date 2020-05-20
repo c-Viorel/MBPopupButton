@@ -35,8 +35,8 @@ class MBTagViewController: NSView {
     weak var delegate:MBTagViewControllerDelegate?
     weak var closeTagButtonCustomizationDelegate:MBTagCloseButtonCustomizationDelegate?
     private var popover:NSPopover?
-    let addButton:MBTextButton = {
-       let btn     = MBTextButton.init(frame: NSMakeRect(0, 0, 30, 28))
+    let addButton:NSButton = {
+       let btn     = NSButton.init(frame: NSMakeRect(0, 0, 30, 28))
         btn.image  = #imageLiteral(resourceName: "circleAdd")
         btn.target = self as AnyObject
         btn.action = #selector(openAddTagController(_:))
@@ -193,9 +193,9 @@ class MBTagViewController: NSView {
     }
 
     /// Open interface for adding a new tag
-    @objc func openAddTagController(_ sender:MBTextButton) {
+    @objc func openAddTagController(_ sender:NSTextField) {
         if popover == nil {
-            let contentController = MBTagPopoverController.init(nibName: "MBTagPopoverController", bundle: nil)
+            let contentController = MBPopupListController.init(nibName: "MBTagPopoverController", bundle: nil)
             
             contentController.suggestionTags = self.allTags
             contentController.newTagInserted = { (tag) in
@@ -210,7 +210,7 @@ class MBTagViewController: NSView {
             popover.behavior                = .semitransient
             contentController.popover       = popover
             popover.animates                = true
-            popover.backgroundColor         =  #colorLiteral(red: 0.9599732757, green: 0.9599732757, blue: 0.9599732757, alpha: 1)
+//            popover.backgroundColor         =  #colorLiteral(red: 0.9599732757, green: 0.9599732757, blue: 0.9599732757, alpha: 1)
             self.popover                    = popover
         }
         popover?.show(relativeTo: sender.visibleRect, of: sender, preferredEdge: NSRectEdge.maxY)
