@@ -19,6 +19,7 @@
 		F2796FC72475CFF100D15094 /* MBTagCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2796FC22475CFF100D15094 /* MBTagCloseButton.swift */; };
 		F2796FC82475CFF100D15094 /* MBTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2796FC32475CFF100D15094 /* MBTagViewController.swift */; };
 		F2796FCA2475D0F800D15094 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = F2796FC92475D0F800D15094 /* LICENSE */; };
+		F2796FCC2475D26500D15094 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F2796FCB2475D26500D15094 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		F2796FC22475CFF100D15094 /* MBTagCloseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBTagCloseButton.swift; sourceTree = "<group>"; };
 		F2796FC32475CFF100D15094 /* MBTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBTagViewController.swift; sourceTree = "<group>"; };
 		F2796FC92475D0F800D15094 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		F2796FCB2475D26500D15094 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 		F2796F9E2475CDC200D15094 = {
 			isa = PBXGroup;
 			children = (
+				F2796FCB2475D26500D15094 /* README.md */,
 				F2796FC92475D0F800D15094 /* LICENSE */,
 				F2796FA92475CDC200D15094 /* MBCustomPopupButton */,
 				F2796FA82475CDC200D15094 /* Products */,
@@ -155,6 +158,7 @@
 			files = (
 				F2796FAF2475CDC400D15094 /* Assets.xcassets in Resources */,
 				F2796FBE2475CFD900D15094 /* MBTagPopoverController.xib in Resources */,
+				F2796FCC2475D26500D15094 /* README.md in Resources */,
 				F2796FCA2475D0F800D15094 /* LICENSE in Resources */,
 				F2796FB22475CDC400D15094 /* Main.storyboard in Resources */,
 			);
