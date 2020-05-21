@@ -197,7 +197,7 @@ class MBTagViewController: NSView {
         if popover == nil {
             let contentController = MBPopupListController.init(nibName: "MBTagPopoverController", bundle: nil)
             
-            contentController.suggestionTags = self.allTags
+//            contentController.suggestionTags = self.allTags
             contentController.newTagInserted = { (tag) in
                 self.popover?.close()
                 contentController.searchField.stringValue = ""

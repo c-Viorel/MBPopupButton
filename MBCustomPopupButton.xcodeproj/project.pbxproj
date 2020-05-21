@@ -92,7 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				F2796FD22475F18200D15094 /* New Group */,
-				F2796FCD2475D8E500D15094 /* MBButton */,
+				F2796FCD2475D8E500D15094 /* MBPopupButton */,
 				F2796FBF2475CFF100D15094 /* Extensions.swift */,
 				F2796FC22475CFF100D15094 /* MBTagCloseButton.swift */,
 				F2796FC12475CFF100D15094 /* MBTagView.swift */,
@@ -104,13 +104,13 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		F2796FCD2475D8E500D15094 /* MBButton */ = {
+		F2796FCD2475D8E500D15094 /* MBPopupButton */ = {
 			isa = PBXGroup;
 			children = (
 				F2796FCF2475D90000D15094 /* MBPopupButton.swift */,
 				F2796FCE2475D90000D15094 /* MBPopupButtonCell.swift */,
 			);
-			path = MBButton;
+			path = MBPopupButton;
 			sourceTree = "<group>";
 		};
 		F2796FD22475F18200D15094 /* New Group */ = {

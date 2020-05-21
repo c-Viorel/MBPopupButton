@@ -54,6 +54,7 @@ open class MBPopupButton: NSButton {
     /// In case that you want to fine adjust the y position of the title
     @IBInspectable var decaleYTitle: CGFloat = 0 { didSet { resetLayersProperties() } }
 
+    //MARK: -open's vars
     /// The state of the control. If is not enable, all interaction are disabled.
     open override var isEnabled: Bool {
         get {
@@ -70,6 +71,8 @@ open class MBPopupButton: NSButton {
     open override var bounds: NSRect { didSet { self.resetLayersProperties(animated: false) } }
 
     open override var title: String { didSet { resetLayersProperties() } }
+    
+    open var items:[MBPopupItem] = [] 
 
     // MARK: - Private vars
 

@@ -18,19 +18,14 @@ public class MBPopupListController: NSViewController, NSTableViewDelegate, NSTab
     @IBOutlet var searchField: NSSearchField!
     
 
-    private var matches:[MBTagView] = []
-    private var maxTagWidth:CGFloat = 0
+    private var matches:[MBPopupItem] = []
+    private var maxCellWidth:CGFloat = 0
     
     weak var popover:NSPopover?
-    var newTagInserted:((MBTagView)->Void)?
-    var suggestionTags:[MBTagView] = [] {
+    var newTagInserted:((MBTagView)->Void)? // o be removed
+    
+    var items:[MBPopupItem] = [] {
         didSet{
-            maxTagWidth = 0
-            suggestionTags.forEach { (tag) in
-                if maxTagWidth < tag.frame.width {
-                    maxTagWidth = tag.frame.width
-                }
-            }
             if tableWithTags != nil {
                 tableWithTags.reloadData()
             }
@@ -45,7 +40,6 @@ public class MBPopupListController: NSViewController, NSTableViewDelegate, NSTab
         tableWithTags.dataSource   = self
         searchField.delegate       = self
         tableWithTags.target       = self
-        tableWithTags.doubleAction = #selector(insert(_:))
     }
     
 
@@ -59,37 +53,6 @@ public class MBPopupListController: NSViewController, NSTableViewDelegate, NSTab
     @IBAction func startSearch(_ sender: Any) {
         //just reload data to see new results
         self.tableWithTags.reloadData()
-    }
-    
-    /// Insert current selected tag, or create a new one if nothing is selected
-    @objc func insert(_ sender:AnyObject) {
-        if tableWithTags.selectedRow != -1 {
-            let tag = MBTagView.init(with: matches[tableWithTags.selectedRow].title, color: matches[tableWithTags.selectedRow].tagColor, id: matches[tableWithTags.selectedRow].id)
-            newTagInserted?(tag)
-            return
-        } else {
-            if searchField.stringValue.count > 0 {
-                
-                if suggestionTags.contains(where: { (current) -> Bool in
-                    return current.title.lowercased() == searchField.stringValue.lowercased()
-                }) {
-                    /// A tag with an identical name exist, but user didn't selected from suggestions.
-                    /// we don't create a new tag. We will use the one that already exist
-                    let tags = suggestionTags.filter { (current) -> Bool in
-                        return current.title.lowercased() == searchField.stringValue.lowercased()
-                    }
-                    if tags.count > 0 {
-                        let tag = MBTagView.init(with: tags[0].title, color: tags[0].tagColor, id: tags[0].id)
-                        newTagInserted?(tag)
-                    }
-                    
-                } else {
-                    // The tag does not exist. Create a new one and add it to the tag controller.
-                    let tag            = MBTagView.init(with: searchField.stringValue, color: .red)
-                    newTagInserted?(tag)
-                }
-            }
-        }
     }
     
     /// Detect some important actions
@@ -131,30 +94,26 @@ public class MBPopupListController: NSViewController, NSTableViewDelegate, NSTab
             return true
             ///Enter key
         case #selector(insertNewline):
-            self.insert(tableWithTags)
+            /// call designated action
             return true
         default:
             return false
         }
-    
     }
     
     //MARK:- Tags table dataSource
     public func numberOfRows(in tableView: NSTableView) -> Int {
-        matches = suggestionTags
+        matches = items
+        
         if self.searchField.stringValue.count > 0 {
-            matches = suggestionTags.filter({ (tag) -> Bool in
-                if tag.title.lowercased().contains(self.searchField.stringValue.lowercased()) {
-                    return true
-                }
-                return false
-            })
+            matches = items.filter({$0.isIncluded(forString: searchField.stringValue )})
         }
+            
         let height = tableWithTags.rowHeight
         if matches.count < 8 {
-            adjustPopoverContentTo(newSize: NSMakeSize(minPopoverWidth > maxTagWidth ? minPopoverWidth : maxTagWidth, height * CGFloat(matches.count)))
+            adjustPopoverContentTo(newSize: NSMakeSize(minPopoverWidth > maxCellWidth ? minPopoverWidth : maxCellWidth, height * CGFloat(matches.count)))
         } else {
-            adjustPopoverContentTo(newSize: NSMakeSize(minPopoverWidth > maxTagWidth ? minPopoverWidth : maxTagWidth, height * 8))
+            adjustPopoverContentTo(newSize: NSMakeSize(minPopoverWidth > maxCellWidth ? minPopoverWidth : maxCellWidth, height * 8))
         }
 
         return  matches.count
@@ -178,10 +137,6 @@ public class MBPopupListController: NSViewController, NSTableViewDelegate, NSTab
             textField.setFrameOrigin(NSMakePoint(15, 2))
             
         }
-        
-        cellView!.tagColor = matches[row].tagColor
-        cellView!.textField!.stringValue = matches[row].title
-        
         
         return cellView
         

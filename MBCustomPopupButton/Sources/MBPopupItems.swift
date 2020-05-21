@@ -10,7 +10,18 @@ import Cocoa
 
 /// The base class for all items accepted  by our popup control
 /// DO NOT INIT objects  of this class.
-open class MBPopupItem { fileprivate init() {} }
+open class MBPopupItem:NSObject { fileprivate override init() {} }
+internal extension MBPopupItem {
+    var isSeparator:Bool { isKind(of: MBPopupSeparatorItem.self)}
+    func isIncluded(forString search:String) -> Bool {
+        if isSeparator {return true}
+        if let item = self as? MBPopupTextItem {
+            return item.title.lowercased().contains(search.lowercased())
+        }
+        return false
+    }
+}
+
 
 /// A class that describe the properties for a separator item
 open class MBPopupSeparatorItem: MBPopupItem {
@@ -66,16 +77,12 @@ open class MBPopupTextItem: MBPopupItem {
 }
 
 /// A class that describe the properties for an item that along title, will also contain an icon.
-open class MBPopupIconAndTextItem: MBPopupItem {
+open class MBPopupIconAndTextItem: MBPopupTextItem {
     
     open var icon:NSImage
-    open var title:String
-    open var titleColor: NSColor
     
     public init(withTitle title:String, image:NSImage,  color: NSColor = .lightGray) {
-        self.title = title
-        titleColor = color
         icon = image
-        super.init()
+        super.init(withTitle: title, color: color)
     }
 }
