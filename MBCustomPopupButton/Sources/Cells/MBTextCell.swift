@@ -20,5 +20,6 @@ internal class MBTextCell: NSTableCellView {
         textItem = item
         selectionImage.animator().isHidden = !item.isSelected
         titleFiled.stringValue = item.title
+        titleFiled.textColor = item.titleColor
     }
 }

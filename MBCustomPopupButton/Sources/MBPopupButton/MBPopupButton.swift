@@ -168,7 +168,8 @@ open class MBPopupButton: NSButton {
                                         MBPopupTextItem.init(withTitle: "Viorel1"),
                                         MBPopupTextItem.init(withTitle: "Viorel2"),
                                         MBPopupTextItem.init(withTitle: "Viorel3"),
-                                        MBPopupTextItem.init(withTitle: "Viorel4"),
+                                        MBPopupSeparatorItem(withColor: .lightGray, lineHeight: 4, paddingLeft: 20, paddingRight: 0),
+                                        MBPopupTextItem.init(withTitle: "Viorel4", color: .red),
                                         ]
 
             let popover                     = NSPopover.init()
