@@ -10,11 +10,11 @@ import Foundation
 import Cocoa
 
 protocol ReuseIdentifying {
-    static var reuseIdentifier: NSUserInterfaceItemIdentifier { get }
+    static var identifier: NSUserInterfaceItemIdentifier { get }
 }
 
 extension ReuseIdentifying {
-    static var reuseIdentifier: NSUserInterfaceItemIdentifier {
+    static var identifier: NSUserInterfaceItemIdentifier {
         let cellId = String(describing: self)
         return NSUserInterfaceItemIdentifier.init(cellId)
     }
@@ -28,7 +28,7 @@ extension NSTableView {
                                                          for indexPath: IndexPath,
                                                          configure: ((CellClass) -> Void) = { _ in }) -> NSTableCellView {
 
-        let cell = makeView(withIdentifier: cellType.reuseIdentifier, owner: self)
+        let cell = makeView(withIdentifier: cellType.identifier, owner: self)
         if let typedCell = cell as? CellClass {
             configure(typedCell)
             return typedCell
