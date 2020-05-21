@@ -8,67 +8,83 @@
 
 import Cocoa
 
-
-
-
 // MARK: - Extend NSBezierPath  to be able to convert selt into a CGPath
-extension NSBezierPath {
-    public var cgPath: CGPath {
+
+internal extension NSBezierPath {
+    var cgPath: CGPath {
         let path = CGMutablePath()
         var points = [CGPoint](repeating: .zero, count: 3)
         for i in 0 ..< self.elementCount {
             let type = self.element(at: i, associatedPoints: &points)
             switch type {
-            case .moveTo: path.move(to: CGPoint(x: points[0].x, y: points[0].y) )
-            case .lineTo: path.addLine(to: CGPoint(x: points[0].x, y: points[0].y) )
+            case .moveTo: path.move(to: CGPoint(x: points[0].x, y: points[0].y))
+            case .lineTo: path.addLine(to: CGPoint(x: points[0].x, y: points[0].y))
             case .curveTo: path.addCurve(to: CGPoint(x: points[2].x, y: points[2].y),
-                                                          control1: CGPoint(x: points[0].x, y: points[0].y),
-                                                          control2: CGPoint(x: points[1].x, y: points[1].y) )
+                                         control1: CGPoint(x: points[0].x, y: points[0].y),
+                                         control2: CGPoint(x: points[1].x, y: points[1].y))
             case .closePath: path.closeSubpath()
+            @unknown default:
+                fatalError("An unknown case was added in the meantime: \(type). Please check, and hanle it properly")
             }
         }
         return path
     }
 }
 
-
-extension NSTextField {
-    
+internal extension NSTextField {
     func bestWidth() -> CGFloat {
         self.stringValue = self.stringValue
-        let getnumber = self.cell!.cellSize(forBounds: NSMakeRect(CGFloat(0.0), CGFloat(0.0), CGFloat(Float.greatestFiniteMagnitude) , 25)).width
+        let getnumber = self.cell!.cellSize(forBounds: NSMakeRect(CGFloat(0.0), CGFloat(0.0), CGFloat(Float.greatestFiniteMagnitude), 25)).width
         return getnumber
     }
 }
 
-// MARK: - Extend Array to support removing a specific element.
-extension Array where Element: Equatable  {
-    mutating func delete(element: Iterator.Element) {
-        self = self.filter{$0 != element }
+extension String {
+    static var dummyTextField: NSTextField {
+        return NSTextField(frame: NSRect.zero)
     }
-    mutating func remove(element: Iterator.Element) {
-        self = self.filter{$0 != element }
+
+    func bestWidh(forFontSize size: CGFloat = 13.0, font: NSFont = NSFont.systemFont(ofSize: 13)) -> CGFloat {
+        String.dummyTextField.font = font
+
+        if let newfont = NSFont(descriptor: font.fontDescriptor, size: size) {
+            String.dummyTextField.font = newfont
+        }
+        String.dummyTextField.stringValue = self
+
+        return String.dummyTextField.bestWidth()
     }
 }
 
+// MARK: - Extend Array to support removing a specific element.
+
+internal extension Array where Element: Equatable {
+    mutating func delete(element: Iterator.Element) {
+        self = self.filter { $0 != element }
+    }
+
+    mutating func remove(element: Iterator.Element) {
+        self = self.filter { $0 != element }
+    }
+}
 
 // MARK: - Extend NSImage to support recolor an image with specific color.
-extension NSImage {
+
+internal extension NSImage {
     func tinting(with tintColor: NSColor) -> NSImage {
         guard let cgImage = self.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return self }
-        
+
         return NSImage(size: size, flipped: false) { bounds in
             guard let context = NSGraphicsContext.current?.cgContext else { return false }
-            
+
             tintColor.set()
             context.clip(to: bounds, mask: cgImage)
             context.fill(bounds)
-            
+
             return true
         }
     }
 }
-
 
 /// Add posibility to shuffle any mutable collection
 extension MutableCollection {
@@ -77,7 +93,7 @@ extension MutableCollection {
         let c = count
         guard c > 1 else { return }
         for (firstUnshuffled, unshuffledCount) in zip(indices, stride(from: c, to: 1, by: -1)) {
-            let d:Int = numericCast(arc4random_uniform(numericCast(unshuffledCount)))
+            let d: Int = numericCast(arc4random_uniform(numericCast(unshuffledCount)))
             let i = index(firstUnshuffled, offsetBy: d)
             swapAt(firstUnshuffled, i)
         }
@@ -91,8 +107,8 @@ extension Sequence {
         result.shuffle()
         return result
     }
-    
-    func random(numberOfElements:Int) -> [Element] {
+
+    func random(numberOfElements: Int) -> [Element] {
         var array = Array(self)
         if numberOfElements == 0 {
             return []
@@ -101,13 +117,13 @@ extension Sequence {
             return array
         }
         array.shuffle()
-        var newArray:[Element] = []
-        for i in 0...numberOfElements-1 {
+        var newArray: [Element] = []
+        for i in 0 ... numberOfElements - 1 {
             newArray.append(array[i])
         }
         return newArray
     }
-    
+
     func randomElement() -> Element? {
         var array = Array(self)
         if array.count == 0 {
