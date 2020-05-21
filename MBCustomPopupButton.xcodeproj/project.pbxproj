@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		164C0AC5A6068D97713A1CFA /* Pods_MBCustomPopupButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29BD61AA71649A9BF4DA6170 /* Pods_MBCustomPopupButton.framework */; };
 		F259DA842476A82700475D5E /* ReuseIdentifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = F259DA832476A82700475D5E /* ReuseIdentifying.swift */; };
 		F259DA8B2476B5AC00475D5E /* MBSeparatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F259DA8A2476B5AC00475D5E /* MBSeparatorCell.swift */; };
 		F259DA8D2476B9E000475D5E /* MBTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F259DA8C2476B9E000475D5E /* MBTextCell.swift */; };
@@ -29,6 +30,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1BF0571811447176E371A66F /* Pods-MBCustomPopupButton.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MBCustomPopupButton.debug.xcconfig"; path = "Target Support Files/Pods-MBCustomPopupButton/Pods-MBCustomPopupButton.debug.xcconfig"; sourceTree = "<group>"; };
+		29BD61AA71649A9BF4DA6170 /* Pods_MBCustomPopupButton.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MBCustomPopupButton.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B984152056A4860C86D1A80C /* Pods-MBCustomPopupButton.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MBCustomPopupButton.release.xcconfig"; path = "Target Support Files/Pods-MBCustomPopupButton/Pods-MBCustomPopupButton.release.xcconfig"; sourceTree = "<group>"; };
 		F259DA832476A82700475D5E /* ReuseIdentifying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReuseIdentifying.swift; sourceTree = "<group>"; };
 		F259DA872476B58700475D5E /* MBSeparatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MBSeparatorCell.swift; path = ../../../../../../../Desktop/MBSeparatorCell.swift; sourceTree = "<group>"; };
 		F259DA8A2476B5AC00475D5E /* MBSeparatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBSeparatorCell.swift; sourceTree = "<group>"; };
@@ -59,12 +63,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				164C0AC5A6068D97713A1CFA /* Pods_MBCustomPopupButton.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9380FB5D5EECDCBA1B28D852 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1BF0571811447176E371A66F /* Pods-MBCustomPopupButton.debug.xcconfig */,
+				B984152056A4860C86D1A80C /* Pods-MBCustomPopupButton.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A87C7F3F09297AE7DC14C176 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29BD61AA71649A9BF4DA6170 /* Pods_MBCustomPopupButton.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F259DA882476B59300475D5E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +105,8 @@
 				F2796FC92475D0F800D15094 /* LICENSE */,
 				F2796FA92475CDC200D15094 /* MBCustomPopupButton */,
 				F2796FA82475CDC200D15094 /* Products */,
+				9380FB5D5EECDCBA1B28D852 /* Pods */,
+				A87C7F3F09297AE7DC14C176 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -141,9 +166,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F2796FB72475CDC400D15094 /* Build configuration list for PBXNativeTarget "MBCustomPopupButton" */;
 			buildPhases = (
+				6ACC8A6B4834B3DB4DFFF804 /* [CP] Check Pods Manifest.lock */,
 				F2796FA32475CDC200D15094 /* Sources */,
 				F2796FA42475CDC200D15094 /* Frameworks */,
 				F2796FA52475CDC200D15094 /* Resources */,
+				62A6658A673B8C4B15498231 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -201,6 +228,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		62A6658A673B8C4B15498231 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MBCustomPopupButton/Pods-MBCustomPopupButton-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MBCustomPopupButton/Pods-MBCustomPopupButton-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MBCustomPopupButton/Pods-MBCustomPopupButton-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6ACC8A6B4834B3DB4DFFF804 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MBCustomPopupButton-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F2796FA32475CDC200D15094 /* Sources */ = {
@@ -353,6 +422,7 @@
 		};
 		F2796FB82475CDC400D15094 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BF0571811447176E371A66F /* Pods-MBCustomPopupButton.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MBCustomPopupButton/MBCustomPopupButton.entitlements;
@@ -373,6 +443,7 @@
 		};
 		F2796FB92475CDC400D15094 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B984152056A4860C86D1A80C /* Pods-MBCustomPopupButton.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MBCustomPopupButton/MBCustomPopupButton.entitlements;

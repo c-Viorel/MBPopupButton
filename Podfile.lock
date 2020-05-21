@@ -1,0 +1,16 @@
+PODS:
+  - SFBPopovers (1.1.0)
+
+DEPENDENCIES:
+  - SFBPopovers (~> 1.1)
+
+SPEC REPOS:
+  trunk:
+    - SFBPopovers
+
+SPEC CHECKSUMS:
+  SFBPopovers: a254c2dd379258e8ebbb6db8720f0ac9a424c0e9
+
+PODFILE CHECKSUM: 8f53ebe58c1d58870efaf594ccb334b42cb33c2a
+
+COCOAPODS: 1.9.1
