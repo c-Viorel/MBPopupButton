@@ -8,8 +8,7 @@
 
 import Cocoa
 
-@objc public protocol MBTagCloseButtonCustomizationDelegate
-: class {
+@objc public protocol MBTagCloseButtonCustomizationDelegate: class {
     @objc optional func backgroundColor() -> NSColor
     @objc optional func hoverBackgroundColor() -> NSColor
     @objc optional func activeBackgroundColor() -> NSColor

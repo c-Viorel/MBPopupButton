@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F259DA842476A82700475D5E /* ReuseIdentifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = F259DA832476A82700475D5E /* ReuseIdentifying.swift */; };
 		F2796FAB2475CDC200D15094 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2796FAA2475CDC200D15094 /* AppDelegate.swift */; };
 		F2796FAD2475CDC200D15094 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2796FAC2475CDC200D15094 /* ViewController.swift */; };
 		F2796FAF2475CDC400D15094 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2796FAE2475CDC400D15094 /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F259DA832476A82700475D5E /* ReuseIdentifying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReuseIdentifying.swift; sourceTree = "<group>"; };
 		F2796FA72475CDC200D15094 /* MBCustomPopupButton.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MBCustomPopupButton.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2796FAA2475CDC200D15094 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2796FAC2475CDC200D15094 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 			children = (
 				F2796FD22475F18200D15094 /* New Group */,
 				F2796FCD2475D8E500D15094 /* MBPopupButton */,
+				F259DA832476A82700475D5E /* ReuseIdentifying.swift */,
 				F2796FBF2475CFF100D15094 /* Extensions.swift */,
 				F2796FC22475CFF100D15094 /* MBTagCloseButton.swift */,
 				F2796FC12475CFF100D15094 /* MBTagView.swift */,
@@ -198,6 +201,7 @@
 				F2796FD42475F1A000D15094 /* MBPopupItems.swift in Sources */,
 				F2796FAD2475CDC200D15094 /* ViewController.swift in Sources */,
 				F2796FAB2475CDC200D15094 /* AppDelegate.swift in Sources */,
+				F259DA842476A82700475D5E /* ReuseIdentifying.swift in Sources */,
 				F2796FD12475D90000D15094 /* MBPopupButton.swift in Sources */,
 				F2796FBD2475CFD900D15094 /* MBPopupListController.swift in Sources */,
 				F2796FC42475CFF100D15094 /* Extensions.swift in Sources */,
