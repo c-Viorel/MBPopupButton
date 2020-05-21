@@ -39,7 +39,7 @@ class MBTagViewController: NSView {
        let btn     = NSButton.init(frame: NSMakeRect(0, 0, 30, 28))
         btn.image  = #imageLiteral(resourceName: "circleAdd")
         btn.target = self as AnyObject
-        btn.action = #selector(openAddTagController(_:))
+//        btn.action = #selector(openAddTagController(_:))
         btn.title  = ""
         return btn
     }()
@@ -115,8 +115,7 @@ class MBTagViewController: NSView {
         resetScrollerBounds()
         resetTagViewContent()
         
-        addButton.target = self
-        addButton.action = #selector(openAddTagController(_:))
+//        addButton.target = self
     }
 
     
@@ -192,29 +191,6 @@ class MBTagViewController: NSView {
         viewWithTags.animator().setFrameSize(NSMakeSize(totalWidth, self.bounds.height))
     }
 
-    /// Open interface for adding a new tag
-    @objc func openAddTagController(_ sender:NSTextField) {
-        if popover == nil {
-            let contentController = MBPopupListController.init(nibName: "MBTagPopoverController", bundle: nil)
-            
-//            contentController.suggestionTags = self.allTags
-            contentController.newTagInserted = { (tag) in
-                self.popover?.close()
-                contentController.searchField.stringValue = ""
-                self.insert(newTag: tag)
-            }
-            
-            let popover                     = NSPopover.init()
-            popover.appearance              = NSAppearance.init(named: .aqua)
-            popover.contentViewController   = contentController
-            popover.behavior                = .semitransient
-            contentController.popover       = popover
-            popover.animates                = true
-//            popover.backgroundColor         =  #colorLiteral(red: 0.9599732757, green: 0.9599732757, blue: 0.9599732757, alpha: 1)
-            self.popover                    = popover
-        }
-        popover?.show(relativeTo: sender.visibleRect, of: sender, preferredEdge: NSRectEdge.maxY)
-    }
     
     
     //MARK:- Private methods

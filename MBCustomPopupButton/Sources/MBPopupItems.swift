@@ -68,6 +68,7 @@ open class MBPopupTextItem: MBPopupItem {
     
     open var title:String
     open var titleColor: NSColor
+    open var isSelected:Bool = false
     
     public init(withTitle title:String,  color: NSColor = .lightGray) {
         self.title = title

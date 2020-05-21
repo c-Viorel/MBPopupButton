@@ -31,8 +31,6 @@ public class MBPopupListController: NSViewController, NSTableViewDelegate, NSTab
             }
         }
     }
-    
-    
 
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,14 +39,12 @@ public class MBPopupListController: NSViewController, NSTableViewDelegate, NSTab
         searchField.delegate       = self
         tableWithTags.target       = self
     }
-    
 
     public override func viewWillAppear() {
         super.viewWillAppear()
         tableWithTags.reloadData()
     }
-    
-  
+
     /// Start search: Called on enter key
     @IBAction func startSearch(_ sender: Any) {
         //just reload data to see new results
@@ -67,7 +63,6 @@ public class MBPopupListController: NSViewController, NSTableViewDelegate, NSTab
                 isSearchFocused = true
             }
         }
-        
         switch commandSelector {
             /// Key up
         case #selector(moveUp):
@@ -118,27 +113,30 @@ public class MBPopupListController: NSViewController, NSTableViewDelegate, NSTab
 
         return  matches.count
     }
-    
+
+
+
     public func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        var cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "myCell"), owner: self) as? MBTagCellView
-        if cellView == nil{
-            cellView                  = MBTagCellView(frame: NSZeroRect)
-            let textField             = NSTextField(frame: NSZeroRect)
-            textField.isBezeled       = false
-            textField.drawsBackground = false
-            textField.isEditable      = false
-            textField.isSelectable    = false
-            textField.appearance      = NSAppearance.init(named: NSAppearance.Name.vibrantDark)
-            cellView!.addSubview(textField)
-            cellView!.textField       = textField
-            cellView!.identifier      = NSUserInterfaceItemIdentifier(rawValue: "myCell")
-        
-            textField.setFrameOrigin(NSMakePoint(15, 2))
-            
+        let currentItem = matches[row]
+        switch currentItem {
+            case currentItem where currentItem.isKind(of: MBPopupSeparatorItem.self):
+                return tableView.makeCellView(of: MBSeparatorCell.self) { (cell) in
+                    cell.configureCell(with: currentItem as! MBPopupSeparatorItem)
+            }
+            case currentItem where currentItem.isKind(of: MBPopupIconAndTextItem.self):
+                return tableView.makeCellView(of: MBTextAndImageCell.self) { (cell) in
+                    cell.configureCell(with: currentItem as! MBPopupIconAndTextItem)
+            }
+            case currentItem where currentItem.isKind(of: MBPopupTextItem.self):
+                return tableView.makeCellView(of: MBTextCell.self) { (cell) in
+                    cell.configureCell(with: currentItem as! MBPopupTextItem)
+            }
+            default:
+                break
         }
         
-        return cellView
+        return nil
         
     }
     public func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
@@ -184,45 +182,8 @@ class AutoCompleteTableRowView:NSTableRowView {
 }
 
 
-//MARK:- MBTagCellView
-class MBTagCellView:NSTableCellView {
-    
-    var tagColor:NSColor = NSColor.red {
-        didSet {
-            self.needsDisplay = true
-        }
-    }
-    
-    override var backgroundStyle: NSView.BackgroundStyle {
-        didSet {
-            if self.backgroundStyle == .light {
-                self.textField?.textColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1) // Not selected
-                self.textField?.font = NSFont.systemFont(ofSize: 12)
-            } else if self.backgroundStyle == .dark {
-                self.textField?.textColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1) // Selected
-                self.textField?.font      = NSFont.boldSystemFont(ofSize: 12)
-            }
-        }
-    }
-    
-    override func draw(_ dirtyRect: NSRect) {
-        super.draw(dirtyRect)
-        let bez = NSBezierPath.init(ovalIn: NSMakeRect(7, 8, 8, 8))
-        tagColor.setFill()
-        bez.fill()
-    }
-    
-}
-
-
 //MARK:- MBTagSearchField
 /// override default NSSearchField to avoid drawing of the  focus ring mask.
 public class MBSearchField:NSSearchField {
     public override func drawFocusRingMask() { return }
 }
-
-
-
-
-
-

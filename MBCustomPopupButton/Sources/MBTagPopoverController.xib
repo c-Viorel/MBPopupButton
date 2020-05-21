@@ -55,12 +55,12 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
-                                            <tableCellView identifier="myCell" id="CCj-we-b2i">
+                                            <tableCellView identifier="MBTextAndImageCell" id="CCj-we-b2i" customClass="MBTextAndImageCell" customModule="MBCustomPopupButton" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AcS-RA-BJl">
-                                                        <rect key="frame" x="18" y="3" width="336" height="17"/>
+                                                        <rect key="frame" x="45" y="2" width="269" height="17"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="0Qu-tq-14J">
                                                             <font key="font" metaFont="system"/>
@@ -68,10 +68,50 @@
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
+                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Phk-zv-jIu">
+                                                        <rect key="frame" x="20" y="2" width="20" height="20"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="cUH-U2-r2y"/>
+                                                    </imageView>
+                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QZZ-mG-b4D">
+                                                        <rect key="frame" x="320" y="-1" width="20" height="20"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="mjf-kh-Bo2"/>
+                                                    </imageView>
                                                 </subviews>
                                                 <connections>
-                                                    <outlet property="textField" destination="AcS-RA-BJl" id="TbS-z5-iAy"/>
+                                                    <outlet property="itemImage" destination="Phk-zv-jIu" id="fLO-0p-Xgn"/>
+                                                    <outlet property="selectionImage" destination="QZZ-mG-b4D" id="fkN-U5-MAh"/>
+                                                    <outlet property="titleFiled" destination="AcS-RA-BJl" id="6I4-rd-8PF"/>
                                                 </connections>
+                                            </tableCellView>
+                                            <tableCellView identifier="MBTextCell" id="5Ov-Ku-8ll" customClass="MBTextCell" customModule="MBCustomPopupButton" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="24" width="354" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="USb-Pv-DYJ">
+                                                        <rect key="frame" x="20" y="2" width="295" height="17"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="yrw-XT-93i">
+                                                            <font key="font" metaFont="system"/>
+                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f5w-TD-one">
+                                                        <rect key="frame" x="320" y="2" width="20" height="20"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="zzm-l3-w0O"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <connections>
+                                                    <outlet property="selectionImage" destination="f5w-TD-one" id="0hw-Du-ncF"/>
+                                                    <outlet property="titleFiled" destination="USb-Pv-DYJ" id="g38-ti-aAG"/>
+                                                </connections>
+                                            </tableCellView>
+                                            <tableCellView identifier="MBSeparatorCell" id="8vq-S3-a3A" customClass="MBSeparatorCell" customModule="MBCustomPopupButton" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="48" width="354" height="17"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </tableCellView>
                                         </prototypeCellViews>
                                     </tableColumn>

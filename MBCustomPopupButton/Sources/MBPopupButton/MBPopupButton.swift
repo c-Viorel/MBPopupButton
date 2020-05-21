@@ -146,9 +146,7 @@ open class MBPopupButton: NSButton {
             (layers["bg"] as? CALayer)?.backgroundColor = backgroundActiveColor.cgColor
             (layers["title"] as? CATextLayer)?.foregroundColor = titleActiveColor.cgColor
 
-            if let action = action, let target = target {
-                NSApp.sendAction(action, to: target, from: self)
-            }
+            openAddTagController(self)
         }
     }
 
@@ -158,6 +156,31 @@ open class MBPopupButton: NSButton {
             (layers["bg"] as? CALayer)?.backgroundColor = backgroundHoverColor.cgColor
             (layers["title"] as? CATextLayer)?.foregroundColor = titleHoverColor.cgColor
         }
+    }
+
+    private var popover:NSPopover?
+
+    /// Open interface for adding a new tag
+    @objc func openAddTagController(_ sender:NSView) {
+        if popover == nil {
+            let contentController = MBPopupListController.init(nibName: "MBTagPopoverController", bundle: nil)
+            contentController.items = [ MBPopupTextItem.init(withTitle: "Viorel"),
+                                        MBPopupTextItem.init(withTitle: "Viorel1"),
+                                        MBPopupTextItem.init(withTitle: "Viorel2"),
+                                        MBPopupTextItem.init(withTitle: "Viorel3"),
+                                        MBPopupTextItem.init(withTitle: "Viorel4"),
+                                        ]
+
+            let popover                     = NSPopover.init()
+            popover.appearance              = NSAppearance.init(named: .aqua)
+            popover.contentViewController   = contentController
+            popover.behavior                = .semitransient
+            contentController.popover       = popover
+            popover.animates                = true
+            //            popover.backgroundColor         =  #colorLiteral(red: 0.9599732757, green: 0.9599732757, blue: 0.9599732757, alpha: 1)
+            self.popover                    = popover
+        }
+        popover?.show(relativeTo: sender.visibleRect, of: sender, preferredEdge: NSRectEdge.maxY)
     }
 
     private func resetProperties() {
